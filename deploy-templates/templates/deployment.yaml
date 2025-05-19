@@ -32,6 +32,20 @@ spec:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}
+          envFrom:
+            - configMapRef:
+                name: app-config
+          env:
+            - name: application.properties.from.configmap
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: application.properties
+            - name: application.properties.from.secret
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: application.secret.properties
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
