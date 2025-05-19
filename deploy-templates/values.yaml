@@ -91,25 +91,25 @@ autoscaling:
 
 # Additional volumes on the output Deployment definition.
 volumes: 
- - name: config-volume
-   configMap:
-     name: app-config
- - name: config-secret-volume
-   secret:
-     secretName: app-secrets
-     optional: false
+  - name: config-volume
+    configMap:
+      name: app-config
+  - name: config-secret-volume
+    secret:
+      secretName: app-secrets
+      optional: false
 #   secret:
 #     secretName: mysecret
 #     optional: false
 
 # Additional volumeMounts on the output Deployment definition.
-volumeMounts: 
- - name: config-volume
-   mountPath: /config
-   readOnly: true
- - name: config-secret-volume
-   mountPath: /secrets
-   readOnly: true
+volumeMounts:
+  - name: config-volume
+    mountPath: /config
+    readOnly: true
+  - name: config-secret-volume
+    mountPath: /secrets
+    readOnly: true
 # - name: foo
 #   mountPath: "/etc/foo"
 #   readOnly: true
@@ -122,5 +122,3 @@ tolerations: []
 
 # -- https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity
 affinity: {}
-
-
